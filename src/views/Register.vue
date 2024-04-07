@@ -16,14 +16,16 @@
                                                 <div class="form-floating mb-3 mb-md-0">
                                                     <input class="form-control" id="inputFirstName" type="text"
                                                         placeholder="Enter your first name" v-model="form.firstname" />
-                                                    <label for="inputFirstName">First name</label>
+                                                        <div v-if="errors.firstname" class="text-danger">{{ errors.firstname[0] }}</div>
+                                                    <label for="inputFirstName">First name<span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-floating">
                                                     <input class="form-control" id="inputLastName" type="text"
                                                         placeholder="Enter your last name" v-model="form.lastname" />
-                                                    <label for="inputLastName">Last name</label>
+                                                        <div v-if="errors.firstname" class="text-danger">{{ errors.lastname[0] }}</div>
+                                                    <label for="inputLastName">Last name<span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -34,7 +36,7 @@
                                                         <option v-for="item in provinces" :key="item.id" :value="item.id">{{
                                                             item.province_name }}</option>
                                                     </select>
-                                                    <label for="inputFirstName">Province</label>
+                                                    <label for="inputFirstName">Province<span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -43,7 +45,7 @@
                                                         <option v-for="item in districts" :key="item.id" :value="item.id">{{
                                                             item.district_name }}</option>
                                                     </select>
-                                                    <label for="inputLastName">District</label>
+                                                    <label for="inputLastName">District<span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -54,7 +56,7 @@
                                                         <option v-for="item in sectors" :key="item.id" :value="item.id">{{
                                                             item.sector_name }}</option>
                                                     </select>
-                                                    <label for="inputLastName">Sector</label>
+                                                    <label for="inputLastName">Sector<span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -67,7 +69,7 @@
                                                     <select class="form-control" v-model="form.school" v-else>
                                                         <option selected>No Schools found</option>
                                                     </select>
-                                                    <label for="inputLastName">School</label>
+                                                    <label for="inputLastName">School<span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,7 +78,8 @@
                                                 <div class="form-floating mb-3">
                                                     <input class="form-control" id="inputEmail" type="email"
                                                         placeholder="name@example.com" v-model="form.email" />
-                                                    <label for="inputEmail">Email address</label>
+                                                        <div v-if="errors.firstname" class="text-danger">{{ errors.email[0] }}</div>
+                                                    <label for="inputEmail">Email Address <span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -92,7 +95,8 @@
                                                 <div class="form-floating mb-3 mb-md-0">
                                                     <input class="form-control" id="inputPassword" type="password"
                                                         placeholder="Create a password" v-model="form.password" />
-                                                    <label for="inputPassword">Password</label>
+                                                        <div v-if="errors.firstname" class="text-danger">{{ errors.password[0] }}</div>
+                                                    <label for="inputPassword">Password<span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -100,7 +104,8 @@
                                                     <input class="form-control" id="inputPasswordConfirm" type="password"
                                                         placeholder="Confirm password"
                                                         v-model="form.password_confirmation" />
-                                                    <label for="inputPasswordConfirm">Confirm Password</label>
+                                                        <div v-if="errors.firstname" class="text-danger">{{ errors.password_confirmation[0] }}</div>
+                                                    <label for="inputPasswordConfirm">Confirm Password <span class="text-danger">*</span></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,6 +166,7 @@ export default {
                 password_confirmation: null,
                 school: null,
             },
+            errors:{},
             // isLoading: ref(false)
         }
     },
@@ -184,7 +190,12 @@ export default {
                 .then((response) => {
                     this.$router.push('/login');
                 }).catch((error) => {
-                    console.log(error);
+                    if(error.response.status ===401){
+                        this.errors = error.response.data.errors;
+                        console.log(error.response.data.errors);
+                    }else{
+                        console.log('An error occured:',error.message)
+                    }
                 });
         },
         getProvinces() {

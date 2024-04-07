@@ -5,6 +5,12 @@
 
             <a href="#" class="btn btn-primary btn-sm mb-3" @click.prevent="newUnit"><i class="fa fa-plus"></i> Add
                 Unit</a>
+                <a
+            href="#"
+            class="btn btn-primary btn-sm mb-3 float-end"
+            @click.prevent="newTopic"
+            ><i class="fa fa-plus"></i> New Lesson</a
+          >
             <div class="card mb-4" id="list_of_units">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
@@ -30,8 +36,8 @@
                                 <td style="width: 200px;">
                                     <router-link class="btn btn-dark btn-sm me-2" :to="{ name: 'teacher.units' }">
                                         Details</router-link>
-                                    <router-link class="btn btn-primary btn-sm" :to="{ name: 'teacher.lessons' }">
-                                        Lessons</router-link>
+                                    <!-- <router-link class="btn btn-primary btn-sm" :to="{ name: 'teacher.lessons' }">
+                                        Lessons</router-link> -->
                                 </td>
 
                             </tr>
@@ -109,6 +115,61 @@
             </div>
 
             <!-- ===============================================================================-->
+            <!-- ============================================================================== -->
+   <div class="modal" tabindex="-1" id="new_topic_modal">
+        <div class="modal-dialog modal-lg">
+          <form @submit.prevent="storeTopic(form)">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Create New Lesson</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="md-form mb-3">
+                  <input type="hidden" class="form-control" v-model="unit" />
+                  <label>Lesson Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="form.topic_title"
+                  />
+                </div>
+
+                <div class="md-form mb3">
+                  <label>Instructional Objectives</label>
+                  <QuillEditor
+                    theme="snow"
+                    v-model:content="form.instructional_objectives"
+                    content-type="html"
+                  />
+                </div>
+
+                <!-- <div class="md-form mt-3">
+                                    <label>Content</label>
+                                    <QuillEditor theme="snow" v-model:content="form.topic_content" content-type="html" />
+                                </div> -->
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="submit"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ===============================================================================-->
 
             <router-link :to="{ name: 'subjects' }" class="btn btn-primary">Back</router-link>
         </div>
@@ -179,6 +240,31 @@ export default {
                     this.subject = []
                 })
         },
+        newTopic() {
+      $("#new_topic_modal").modal("show");
+    },
+    async storeTopic(form) {
+      await axios
+        .post("/topics", {
+          topic_title: this.form.topic_title,
+          instructional_objectives: this.form.instructional_objectives,
+          // topic_content: this.form.topic_content,
+          unit_id: this.unit,
+        })
+        .then((response) => {
+          this.topics.unshift(response.data);
+          $("#new_topic_modal").modal("hide");
+          // this.isLoading(true)
+          location.reload();
+          $("#list_of_topics").reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          $("#new_topic_modal").modal("hide");
+        });
+    },
     },
     mounted() {
         this.getUnits()

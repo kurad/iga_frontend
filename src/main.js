@@ -6,15 +6,17 @@ import router from './router/index.js'
 import './axios'
 import './assets/js/simple-datatables@latest.js'
 import './assets/js/datatables-simple-demo.js'
-// import './assets/lib/animate/animate.min.css'
-// import './assets/lib/owlcarousel/assets/owl.carousel.min.css'
-// import './assets/css/bootstrap.min.css'
-// import './assets/css/style.css'
+
+import '../src/assets/backend/css/styles.css'
 
 
+import '../src/assets/frontend/dist/css/adminlte.min.css'
 
-
+import '../src/assets/frontend/jquery/jquery.min.js'
+import '../src/assets/frontend/bootstrap/js/bootstrap.bundle.min.js'
+import '../src/assets/frontend/dist/js/adminlte.min.js'
 window.$ = window.jQuery = jQuery;
+
 const app = createApp(App)
     app.use(router)
     app.mount('#app')

@@ -2,9 +2,7 @@
   <main>
     <div class="container-fluid px-4">
       <h1 class="mt-4">Dashboard</h1>
-      <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Dashboard</li>
-      </ol>
+
       <div class="row">
         <div class="col-xl-3 col-md-6">
           <div class="card bg-primary text-white mb-4">
@@ -67,6 +65,8 @@ export default {
       subjects: [],
       lessons: [],
       students: [],
+      user: null,
+      loginType: null,
     };
   },
   created() {
@@ -74,13 +74,14 @@ export default {
     this.countSubjects();
     this.countLessons();
     this.countStudents();
+    this.userProfile();
   },
   methods: {
     async countSchools() {
       await axios.get("/v1/count/school").then(
         function (response) {
           this.schools = response.data;
-          console.log(this.schools);
+          //   console.log(this.schools);
         }.bind(this)
       );
     },
@@ -104,6 +105,17 @@ export default {
           this.students = response.data;
         }.bind(this)
       );
+    },
+    async userProfile() {
+      axios.defaults.headers.common["Content-Type"] = "application/json";
+      axios.defaults.headers.common["Authorization"] =
+        "Bearer " + localStorage.getItem("token");
+
+      axios.get("/profile").then((response) => {
+        this.user = response.data;
+        this.loginType = response.data.is_admin;
+        //this.loginName = response.data.firstname;
+      });
     },
   },
 };

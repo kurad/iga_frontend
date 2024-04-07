@@ -9,14 +9,17 @@
   },
   "dependencies": {
     "@vueup/vue-quill": "^1.2.0",
-    "axios": "^1.5.1",
+    "axios": "^1.6.8",
     "cors": "^2.8.5",
     "jquery": "^3.7.1",
     "moment": "^2.30.1",
+    "vform": "^2.1.2",
+    "vite-plugin-require": "^1.1.14",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.29",
     "@vitejs/plugin-vue": "^4.3.4",
     "vite": "^4.4.9"
   }

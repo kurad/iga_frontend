@@ -1,7 +1,7 @@
 // import ViewHome from '../views/Home/HomeView.vue'
 // import Home from '../views/Home/Home.vue'
 import HomePage from '../views/Home/HomeViewPage.vue'
-import Login from '../views/Login.vue'
+import Login from '../views/LoginForm.vue'
 import Register from '../views/Register.vue'
 import AdminLayout from '../views/layout/adminLayout.vue'
 import SubjectComponent from '../views/SubjectComponent.vue'
@@ -11,9 +11,10 @@ import LessonDetails from '../views/LessonDetails.vue'
 import Levels from '../views/Levels.vue'
 import UnitComponent from '../views/Units/UnitsComponent.vue'
 import Dashboard from '../components/Dashboard.vue'
-import StudentDashboard from '../components/Dashboard.vue'
+import StudentDashboard from '../components/StudentDashboard.vue'
 import TeacherDashboard from '../components/Dashboard.vue'
 import studentLayout from '../views/student_view/studentLayout.vue'
+import LayoutStudent from '../views/student_view/LayoutStudent.vue'
 import teacherLayout from '../views/teachers_view/teacherLayout.vue'
 import StaffRegister from '../views/StaffRegister.vue'
 
@@ -21,11 +22,13 @@ import StudentSubject from '../views/student_view/SubjectComponent.vue'
 import StudentUnits from '../views/student_view/UnitsComponent.vue'
 import StudentLesson from '../views/student_view/LessonComponent.vue'
 import LessonDetails_st from '../views/student_view/LessonDetails.vue'
+import Topics from '../views/student_view/Topics.vue'
 
 import TeacherSubject from '../views/teachers_view/SubjectComponent.vue'
 import TeacherUnits from '../views/teachers_view/UnitsComponent.vue'
 import TeacherLesson from '../views/teachers_view/LessonComponent.vue'
 import LessonDetails_t from '../views/teachers_view/LessonDetails.vue'
+import BrowseLesson from '../views/teachers_view/BrowseLessonComponent.vue'
 import Users from '../views/Users.vue'
 
 
@@ -78,7 +81,7 @@ const routes = [
     {
     path: '/student',
     name: 'student',
-    component: studentLayout,
+    component: LayoutStudent,
     meta: {
       requiresAuth: true,
       is_student: true
@@ -92,6 +95,7 @@ const routes = [
       { path: '/student/dashboard', name: 'student.dashboard',  component: StudentDashboard },
       { path: '/student/lessons', name: 'student.lessons',  component: StudentLesson },
       { path: '/student/lesson/:id', name: 'student.lesson.details',  component: LessonDetails_st },
+      { path: '/subject/topics', name: 'subject.topics',  component: Topics },
     ]
   },
 
@@ -110,6 +114,7 @@ const routes = [
     { path: '/teacher/dashboard', name: 'teacher.dashboard',  component: TeacherDashboard },
     { path: '/teacher/lessons', name: 'teacher.lessons',  component: TeacherLesson },
     { path: '/teacher/lesson/:id', name: 'teacher.lesson.details',  component: LessonDetails_t },
+    { path: '/teacher/browse/lessons', name: 'browse.lessons',  component: BrowseLesson },
   ]
 }
 
