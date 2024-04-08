@@ -95,7 +95,7 @@ const routes = [
       { path: '/student/dashboard', name: 'student.dashboard',  component: StudentDashboard },
       { path: '/student/lessons', name: 'student.lessons',  component: StudentLesson },
       { path: '/student/lesson/:id', name: 'student.lesson.details',  component: LessonDetails_st },
-      { path: '/subject/topics', name: 'subject.topics',  component: Topics },
+      { path: '/subject/topics/:id', name: 'subject.topics',  component: Topics },
     ]
   },
 

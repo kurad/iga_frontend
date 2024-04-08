@@ -21,13 +21,13 @@
     <div class="container-fluid">
       <!-- Timelime example  -->
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" v-for="item in topics" :key="item.id">
           <!-- The time line -->
           <div class="timeline">
             <div>
               <div class="timeline-item">
                 <h3 class="timeline-header">
-                  <a href="#">Support Team</a> sent you an email
+                  {{ item.topic_title }}
                 </h3>
 
                 <div class="timeline-body">
@@ -50,5 +50,35 @@
     </div>
     <!-- /.timeline -->
   </section>
+  <router-link :to="{ name: 'student.dashboard' }" class="btn btn-primary">
+    Back
+  </router-link>
   <!-- /.content -->
 </template>
+<script>
+import axios from "axios";
+export default {
+  components: {
+    name: "Topics",
+  },
+  data() {
+    return {
+      topics: [],
+    };
+  },
+
+  methods: {
+    getTopics() {
+      axios.get(`/v1/count/topics/${this.$route.params.id}`).then(
+        function (response) {
+          this.topics = response.data;
+          console.log(this.topics);
+        }.bind(this)
+      );
+    },
+  },
+  created() {
+    this.getTopics();
+  },
+};
+</script>

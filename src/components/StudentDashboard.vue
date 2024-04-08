@@ -45,15 +45,55 @@
           </div>
         </div>
       </div>
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <div class="card card-primary">
+                <div class="card-header p-2 border-bottom-0">
+                  <h4>List of Subjects</h4>
+                </div>
+                <div class="card-body">
+                  <table class="table table-bordered table-sm">
+                    <thead>
+                      <th>#</th>
+                      <th>Subject Name</th>
+                      <th>No of Lessons</th>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(item, index) in totalTopic" :key="index">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ item.subjName }}</td>
+                        <td style="width: 15px">
+                          <router-link
+                            :to="{
+                              name: 'subject.topics',
+                              params: { id: item.id },
+                            }"
+                          >
+                            {{ item.total_topics }}
+                          </router-link>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div
+                    v-for="(item, index) in totalTopic"
+                    :key="index"
+                    v-show="activateTab === index"
+                  >
+                    {{ item.topic_title }}
+                  </div>
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </section>
     </div>
   </main>
-  <footer class="py-4 bg-light mt-auto">
-    <div class="container-fluid px-4">
-      <div class="d-flex align-items-center justify-content-between small">
-        <div class="text-muted">Copyright &copy; Your Website 2022</div>
-      </div>
-    </div>
-  </footer>
 </template>
 <script>
 import axios from "axios";
@@ -67,6 +107,9 @@ export default {
       students: [],
       user: null,
       loginType: null,
+      allSubjects: [],
+      totalTopic: [],
+      activeTab: 0,
     };
   },
   created() {
@@ -75,6 +118,8 @@ export default {
     this.countLessons();
     this.countStudents();
     this.userProfile();
+    this.get_subjects();
+    this.total_topics();
   },
   methods: {
     async countSchools() {
@@ -105,6 +150,19 @@ export default {
           this.students = response.data;
         }.bind(this)
       );
+    },
+    get_subjects() {
+      axios.get("/subjects").then((response) => {
+        this.allSubjects = response.data;
+      });
+    },
+    total_topics() {
+      axios.get("/v1/count/topics").then((response) => {
+        this.totalTopic = response.data;
+      });
+    },
+    activateTab(index) {
+      this.activeTab = index;
     },
     async userProfile() {
       axios.defaults.headers.common["Content-Type"] = "application/json";
