@@ -230,7 +230,6 @@ export default {
       form: {
         topic_title: null,
         instructional_objectives: null,
-        // topic_content: null,
         unit_id: this.unit,
       },
     };
@@ -239,7 +238,6 @@ export default {
     async getSchools() {
       let response = await axios.get("/v1/school-info");
       this.schools = response.data;
-      console.log(this.schools);
     },
     newTopic() {
       $("#new_topic_modal").modal("show");
@@ -249,14 +247,11 @@ export default {
         .post("/topics", {
           topic_title: this.form.topic_title,
           instructional_objectives: this.form.instructional_objectives,
-          // topic_content: this.form.topic_content,
           unit_id: this.unit,
         })
         .then((response) => {
           this.topics.unshift(response.data);
           $("#new_topic_modal").modal("hide");
-          // this.isLoading(true)
-          // location.reload()
           $("#list_of_topics").reload();
         })
         .catch((error) => {
@@ -311,7 +306,6 @@ export default {
         .then(
           function (response) {
             this.topics = response.data;
-            console.log(this.topics);
           }.bind(this)
         );
     },
