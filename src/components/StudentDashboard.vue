@@ -2,7 +2,6 @@
   <main>
     <div class="container-fluid px-4">
       <h1 class="mt-4">Dashboard</h1>
-
       <div class="row">
         <div class="col-xl-3 col-md-6">
           <div class="card bg-primary text-white mb-4">
@@ -51,7 +50,7 @@
             <div class="col-12 col-sm-4">
               <div class="card card-primary">
                 <div class="card-header p-2 border-bottom-0">
-                  <h4>List of Subjects</h4>
+                  <h5>List of Subjects</h5><span >Select a lesson to Enroll</span>
                 </div>
                 <div class="card-body">
                   <table class="table table-bordered table-sm">
@@ -88,6 +87,50 @@
                 <!-- /.card -->
               </div>
             </div>
+            <div class="col-12 col-sm-8">
+              <div class="card card-success">
+                <div class="card-header p-2 border-bottom-0">
+                  <h4>My Enrollments</h4>
+                </div>
+                <div class="card-body">
+                  <table class="table table-bordered table-sm">
+                    <thead>
+                      <th>#</th>
+                      <th>Subject Name</th>
+                      <th>Lesson Title</th>
+                      <th>Unit</th>
+                      <th>Action</th>
+                    </thead>
+                    <tbody v-if="enrollments.length>0">
+                      <tr v-for="(item, index) in enrollments" :key="index">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.topic_title }}</td>
+                        <td>{{ item.unit_title }}</td>
+                        <td>
+                          <router-link
+                            :to="{
+                              name: 'subject.topics',
+                              params: { id: item.id },
+                            }"
+                          >
+                            Go to Course
+                          </router-link>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-else>
+                      <tr >
+                        <td colspan="5" class="text-center fw-bold">No Enrollments found</td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                 
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
           </div>
         </div>
         <!-- /.container-fluid -->
@@ -110,6 +153,8 @@ export default {
       allSubjects: [],
       totalTopic: [],
       activeTab: 0,
+      loading: false,
+      enrollments:[],
     };
   },
   created() {
@@ -120,6 +165,7 @@ export default {
     this.userProfile();
     this.get_subjects();
     this.total_topics();
+    this.allEnrollment();
   },
   methods: {
     async countSchools() {
@@ -175,6 +221,18 @@ export default {
         //this.loginName = response.data.firstname;
       });
     },
+    async allEnrollment(){
+      this.loading = true;
+      await axios.get('v1/enrollments').then((response)=>{
+        this.enrollments = response.data;
+      })
+      .catch((error) =>{
+        console.log(error);
+      })
+      .finally(() =>{
+        this.loading = false;
+      })
+    }
   },
 };
 </script>

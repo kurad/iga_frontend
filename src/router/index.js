@@ -96,6 +96,7 @@ const routes = [
       { path: '/student/lessons', name: 'student.lessons',  component: StudentLesson },
       { path: '/student/lesson/:id', name: 'student.lesson.details',  component: LessonDetails_st },
       { path: '/subject/topics/:id', name: 'subject.topics',  component: Topics },
+      { path: '/topic/enrollment/:id', name: 'topic.enrollment',component:()=>import('../views/student_view/TopicsEnrollment.vue')},
     ]
   },
 

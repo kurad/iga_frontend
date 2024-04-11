@@ -18,75 +18,84 @@
 
   <div class="row">
     <div v-if="loading">Loading...</div>
-    <div class="col-md-4" v-for="item in topics" :key="item.id">
-      <div class="card card-success " style="height: 300px;">
+    <div class="col-md-7">
+      <div class="card card-success ">
         <div class="card-header">
           <h6 class="card-title">
-            Title: <br /><small>{{ item.topic_title }}</small>
+            Title: <br /><small>{{ topic.topic_title }}</small>
           </h6>
-          <div class="card-tools">
-            <button
-              type="button"
-              class="btn btn-tool"
-              data-card-widget="collapse"
-            >
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
+          
           <!-- /.card-tools -->
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-        <p v-html='item.instructional_objectives.substring(0,70) + " ..."' ></p>
+        <p v-html='topic.instructional_objectives' ></p>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          <router-link :to="{name:'topic.enrollment', params:{id:item.topicId}}" class="btn btn-primary btn-sm mr-2"  >
+          <button class="btn btn-primary btn-sm mr-2" @click.prevent="enroll()" >
             Enroll
-          </router-link>
+          </button>
         </div>
       </div>
     </div>
   </div>
-  <router-link :to="{ name: 'student.dashboard' }" class="btn btn-primary">
+  <button :to="{ name: 'student.dashboard' }" class="btn btn-primary">
     Back
-  </router-link>
+  </button>
 </template>
 <script>
 import axios from "axios";
 export default {
   components: {
-    name: "Topics",
+    name: "Topic Enrollment",
   },
   data() {
     return {
-      topics: [],
+      topic: null,
+      user:"",
       loading:false,
     };
   },
 
   methods: {
-    getTopics() {
+    async findTopicId() {
       this.loading=true;
-      axios.get(`/v1/count/topics/${this.$route.params.id}`).then(
-        function (response) {
-          this.topics = response.data;
-          console.log(this.topics);
-
-        }.bind(this)
-      )
-      .catch((error) => {
+    await axios.get(`/v1/student/topic/${this.$route.params.id}`).then((response) => {
+      this.topic = response.data;
+      console.log(this.topic);
+    })
+    .catch((error) => {
           console.log(error)
         })
         .finally(() => {
           this.loading = false;
         });
+  },
+  async userProfile() {
+      await axios.get("/user").then((response) => {
+        this.user = response.data;
+        // console.log(this.user)
+      });
     },
+  async enroll() {
+    await axios
+      .post("/v1/enrollments", {
+        topic_id: this.topic.id,
+        user_id: this.user,
+      })
+      .then((response) => {
+        this.$router.push('/student/dashboard');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   },
   
-
   created() {
-    this.getTopics();
+    this.userProfile();
+    this.findTopicId();
   },
   };
 </script>

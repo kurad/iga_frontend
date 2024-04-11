@@ -28,10 +28,9 @@
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <span class="dropdown-item dropdown-header">15 Notifications</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
-            </a>
+            <button @click.prevent="logout()" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> Logout
+            </button>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
               <i class="fas fa-users mr-2"></i> 8 friend requests
@@ -99,7 +98,12 @@ export default {
     UserDetails,
     // Dashboard
   },
-
+methods:{
+  logout(){
+            localStorage.removeItem('token')
+            this.$router.push('/login')
+        }
+},
   created() {
     axios.defaults.headers.common["Content-Type"] = "application/json";
     axios.defaults.headers.common["Authorization"] =
