@@ -1,10 +1,7 @@
 <template>
   <main>
     <div class="container-fluid px-4">
-      <h1 class="mt-4">Subjects</h1>
-      <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Subjects</li>
-      </ol>
+      <h1 class="mb-4">Subjects</h1>
 
       <a
         href="#"

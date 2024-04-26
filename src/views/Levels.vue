@@ -1,16 +1,13 @@
 <template>
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Dashboard</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
+            <h1 class="mb-4">Levels</h1>
 
             <a href="#" class="btn btn-primary btn-sm mb-3" @click.prevent="newLevel"><i class="fa fa-plus"></i> New</a>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                    DataTable Example
+                    All levels
                 </div>
                 <div class="card-body">
                     <table id="datatablesSimple">

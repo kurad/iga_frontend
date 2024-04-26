@@ -3,7 +3,7 @@
 import HomePage from '../views/Home/HomeViewPage.vue'
 import Login from '../views/LoginForm.vue'
 import Register from '../views/Register.vue'
-import AdminLayout from '../views/layout/adminLayout.vue'
+import AdminLayout from '../views/layout/LayoutAdmin.vue'
 import SubjectComponent from '../views/SubjectComponent.vue'
 import SchoolComponent from '../views/SchoolComponent.vue'
 import LessonComponent from '../views/LessonComponent.vue'
@@ -12,10 +12,10 @@ import Levels from '../views/Levels.vue'
 import UnitComponent from '../views/Units/UnitsComponent.vue'
 import Dashboard from '../components/Dashboard.vue'
 import StudentDashboard from '../components/StudentDashboard.vue'
-import TeacherDashboard from '../components/Dashboard.vue'
+import TeacherDashboard from '../components/TeacherDashboard.vue'
 import studentLayout from '../views/student_view/studentLayout.vue'
 import LayoutStudent from '../views/student_view/LayoutStudent.vue'
-import teacherLayout from '../views/teachers_view/teacherLayout.vue'
+import teacherLayout from '../views/teachers_view/LayoutTeacher.vue'
 import StaffRegister from '../views/StaffRegister.vue'
 
 import StudentSubject from '../views/student_view/SubjectComponent.vue'
@@ -30,7 +30,6 @@ import TeacherLesson from '../views/teachers_view/LessonComponent.vue'
 import LessonDetails_t from '../views/teachers_view/LessonDetails.vue'
 import BrowseLesson from '../views/teachers_view/BrowseLessonComponent.vue'
 import Users from '../views/Users.vue'
-
 
 
 
@@ -88,15 +87,14 @@ const routes = [
   },
     children: [
       {path: '/student/subjects', name: 'student.subjects', component: StudentSubject },
-    //   { path:'/levels', name: 'levels', component: Levels},
-    //   { path:'/schools', name: 'schools', component: SchoolComponent},
       { path: '/student/subjects/:id', name: 'student.units',  component: StudentUnits },
-    //   { path: '/unit/topics/{id}', name: 'unit.lessons',  component: LessonComponent },
       { path: '/student/dashboard', name: 'student.dashboard',  component: StudentDashboard },
       { path: '/student/lessons', name: 'student.lessons',  component: StudentLesson },
       { path: '/student/lesson/:id', name: 'student.lesson.details',  component: LessonDetails_st },
       { path: '/subject/topics/:id', name: 'subject.topics',  component: Topics },
       { path: '/topic/enrollment/:id', name: 'topic.enrollment',component:()=>import('../views/student_view/TopicsEnrollment.vue')},
+      { path: '/student/more/lessons', name: 'more.lessons',component:()=>import('../views/student_view/LessonsGroupedPerSubject.vue')},
+
     ]
   },
 

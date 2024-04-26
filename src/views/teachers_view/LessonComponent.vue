@@ -70,7 +70,37 @@
               </div>
               <div class="modal-body">
                 <div class="md-form mb-3">
-                  <input type="hidden" class="form-control" v-model="unit" />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Select Level</label>
+                        <select class="form-control" v-model="level" @change="getSubjects()">
+                          <option v-for="level in levels" :key="level.id" :value="level.id">
+                            {{ level.name }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Select Subject</label>
+                        <select class="form-control" v-model="subject" @change="getUnits()" >
+                          <option v-for="subj in subjects" :key="subj.id" :value="subj.id">
+                            {{ subj.name }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Select Unit</label>
+                        <select class="form-control" v-model="unit">
+                          <option v-for="unit in units" :key="unit.id" :value="unit.id">{{ unit.unit_title }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
                   <label>Lesson Title</label>
                   <input
                     type="text"
@@ -87,11 +117,6 @@
                     content-type="html"
                   />
                 </div>
-
-                <!-- <div class="md-form mt-3">
-                                    <label>Content</label>
-                                    <QuillEditor theme="snow" v-model:content="form.topic_content" content-type="html" />
-                                </div> -->
               </div>
               <div class="modal-footer">
                 <button

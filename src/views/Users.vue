@@ -1,10 +1,7 @@
 <template>
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Dashboard</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
+            <h1 class="mb-4">Users</h1>
 
             <a href="#" class="btn btn-primary btn-sm mb-3" @click.prevent="newSchool"><i class="fa fa-plus"></i> New
                 User</a>
@@ -14,12 +11,11 @@
                     List of Users
                 </div>
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table table-responsive">
                         <thead>
                             <tr>
                                 <th># </th>
-                                <th>FirstName</th>
-                                <th>LastName</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>School</th>
                                 <th>Province</th>
@@ -34,8 +30,7 @@
 
                             <tr v-for="(item, index) in users" :key="item.id">
                                 <td>{{ index + 1 }}</td>
-                                <td>{{ item.firstname }}</td>
-                                <td>{{ item.lastname }}</td>
+                                <td>{{ item.firstname }} {{ item.lastname }}</td>
                                 <td>{{ item.email }}</td>
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.province_name }}</td>

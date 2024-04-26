@@ -1,10 +1,8 @@
 <template>
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Lessons</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Lessons</li>
-            </ol>
+            <h1 class="mb-4">Lessons</h1>
+
             <div class="card mb-4">
                 <div class="card-header bg-primary">
                     <i class="fas fa-filter me-1"></i>

@@ -24,8 +24,6 @@
           <h6 class="card-title">
             Title: <br /><small>{{ topic.topic_title }}</small>
           </h6>
-          
-          <!-- /.card-tools -->
         </div>
         <!-- /.card-header -->
         <div class="card-body">

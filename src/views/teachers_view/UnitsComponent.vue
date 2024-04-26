@@ -5,11 +5,11 @@
 
             <a href="#" class="btn btn-primary btn-sm mb-3" @click.prevent="newUnit"><i class="fa fa-plus"></i> Add
                 Unit</a>
-                <a
-            href="#"
+                <router-link
+            :to="{name:'teacher.lessons'}"
             class="btn btn-primary btn-sm mb-3 float-end"
-            @click.prevent="newTopic"
-            ><i class="fa fa-plus"></i> New Lesson</a
+           
+            ><i class="fa fa-arrow"></i> Go to Lessons</router-link
           >
             <div class="card mb-4" id="list_of_units">
                 <div class="card-header">
@@ -92,7 +92,7 @@
                     <form @submit.prevent="storeUnit(form)">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Register New Unit</h5>
+                                <h5 class="modal-title">Edit Unit</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -115,61 +115,7 @@
             </div>
 
             <!-- ===============================================================================-->
-            <!-- ============================================================================== -->
-   <div class="modal" tabindex="-1" id="new_topic_modal">
-        <div class="modal-dialog modal-lg">
-          <form @submit.prevent="storeTopic(form)">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Create New Lesson</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="md-form mb-3">
-                  <input type="hidden" class="form-control" v-model="unit" />
-                  <label>Lesson Title</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="form.topic_title"
-                  />
-                </div>
-
-                <div class="md-form mb3">
-                  <label>Instructional Objectives</label>
-                  <QuillEditor
-                    theme="snow"
-                    v-model:content="form.instructional_objectives"
-                    content-type="html"
-                  />
-                </div>
-
-                <!-- <div class="md-form mt-3">
-                                    <label>Content</label>
-                                    <QuillEditor theme="snow" v-model:content="form.topic_content" content-type="html" />
-                                </div> -->
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="submit"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="submit" class="btn btn-primary">Save</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- ===============================================================================-->
+           
 
             <router-link :to="{ name: 'subjects' }" class="btn btn-primary">Back</router-link>
         </div>
@@ -189,12 +135,14 @@ export default {
         return {
             units: [],
             subject: [],
+            topics:[],
 
             form: {
                 subject_id: null,
                 unit_title: null,
                 key_unit_competence: null,
             },
+           
         }
     },
     methods: {
@@ -220,7 +168,6 @@ export default {
                 });
         },
         async getUnits() {
-
             await axios.get(`/subjects/${this.$route.params.id}`)
                 .then((res) => {
                     this.units = res.data
@@ -240,31 +187,8 @@ export default {
                     this.subject = []
                 })
         },
-        newTopic() {
-      $("#new_topic_modal").modal("show");
-    },
-    async storeTopic(form) {
-      await axios
-        .post("/topics", {
-          topic_title: this.form.topic_title,
-          instructional_objectives: this.form.instructional_objectives,
-          // topic_content: this.form.topic_content,
-          unit_id: this.unit,
-        })
-        .then((response) => {
-          this.topics.unshift(response.data);
-          $("#new_topic_modal").modal("hide");
-          // this.isLoading(true)
-          location.reload();
-          $("#list_of_topics").reload();
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          $("#new_topic_modal").modal("hide");
-        });
-    },
+       
+   
     },
     mounted() {
         this.getUnits()

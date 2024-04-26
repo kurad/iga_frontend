@@ -16,41 +16,39 @@
     <!-- /.container-fluid -->
   </section>
 
-  <div class="row">
-    <div v-if="loading">Loading...</div>
-    <div class="col-md-4" v-for="item in topics" :key="item.id">
-      <div class="card card-success " style="height: 300px;">
-        <div class="card-header">
-          <h6 class="card-title">
-            Title: <br /><small>{{ item.topic_title }}</small>
-          </h6>
-          <div class="card-tools">
-            <button
-              type="button"
-              class="btn btn-tool"
-              data-card-widget="collapse"
-            >
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
-          <!-- /.card-tools -->
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-        <p v-html='item.instructional_objectives.substring(0,70) + " ..."' ></p>
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          <router-link :to="{name:'topic.enrollment', params:{id:item.topicId}}" class="btn btn-primary btn-sm mr-2"  >
-            Enroll
-          </router-link>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">sss</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Lesson Title</th>
+                    <th>Lesson Unit</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr v-for=" item in topics" :key="item.topicId">
+                    <td>{{ item.topic_title }}</td>
+                    <td>{{ item.unit_title }}
+                    </td>
+                    <td><router-link to="#" class="btn btn-primary btn-sm">View Details</router-link></td>
+                  </tr>
+                  
+                  </tbody>
+                 
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
   <router-link :to="{ name: 'student.dashboard' }" class="btn btn-primary">
     Back
   </router-link>
+  
+            
 </template>
 <script>
 import axios from "axios";
@@ -61,6 +59,7 @@ export default {
   data() {
     return {
       topics: [],
+      topic:null,
       loading:false,
     };
   },
@@ -82,11 +81,28 @@ export default {
           this.loading = false;
         });
     },
+    // getTopic() {
+    //   this.loading=true;
+    //   axios.get(`/v1/student/subject/${this.$route.params.id}`).then(
+    //     function (response) {
+    //       this.topic = response.data;
+    //       console.log(this.topic);
+
+    //     }.bind(this)
+    //   )
+    //   .catch((error) => {
+    //       console.log(error)
+    //     })
+    //     .finally(() => {
+    //       this.loading = false;
+    //     });
+    // },
   },
   
 
   created() {
     this.getTopics();
+    // this.getTopic();
   },
   };
 </script>

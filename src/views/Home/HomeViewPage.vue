@@ -7,7 +7,7 @@
       href="index.html"
       class="navbar-brand d-flex align-items-center px-4 px-lg-5"
     >
-      <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>iGA</h2>
+      <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>iGa</h2>
     </a>
     <button
       type="button"
@@ -20,10 +20,10 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
         <a href="index.html" class="nav-item nav-link active">Home</a>
-        <a href="about.html" class="nav-item nav-link">About</a>
+        <!-- <a href="about.html" class="nav-item nav-link">About</a>
         <a href="courses.html" class="nav-item nav-link">Courses</a>
 
-        <a href="contact.html" class="nav-item nav-link">Contact</a>
+        <a href="contact.html" class="nav-item nav-link">Contact</a> -->
         <router-link to="/login" class="nav-item nav-link btn-primary btn-sm"
           >Join Now</router-link
         >
@@ -251,7 +251,7 @@
       <div class="row g-3">
         <div class="col-lg-7 col-md-6">
           <div class="row g-3">
-            <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
+            <!-- <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
               <a class="position-relative d-block overflow-hidden" href="">
                 <img
                   class="img-fluid"
@@ -298,125 +298,14 @@
                   <small class="text-primary">Courses</small>
                 </div>
               </a>
-            </div>
+            </div> -->
           </div>
         </div>
-        <div
-          class="col-lg-5 col-md-6 wow zoomIn"
-          data-wow-delay="0.7s"
-          style="min-height: 350px"
-        >
-          <a class="position-relative d-block h-100 overflow-hidden" href="">
-            <img
-              class="img-fluid position-absolute w-100 h-100"
-              src="https://cdn.sanity.io/images/f4xjorm8/production/c76a3ec607c335f7d187ebe3d44acb07689156f3-1024x683.jpg?rect=0,73,1024,538&w=1200&h=630"
-              alt=""
-              style="object-fit: cover"
-            />
-            <div
-              class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
-              style="margin: 1px"
-            >
-              <h5 class="m-0">Geography & Economics</h5>
-              <small class="text-primary">Courses</small>
-            </div>
-          </a>
-        </div>
+        
       </div>
     </div>
   </div>
   <!-- Categories Start -->
-
-  <!-- Courses Start -->
-  <!-- Courses Start -->
-  <div class="container-xxl py-5">
-    <div class="container">
-      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-        <h6 class="section-title bg-white text-center text-primary px-3">
-          Courses
-        </h6>
-        <h1 class="mb-5">Other courses</h1>
-      </div>
-
-      <div class="row g-3">
-        <div class="col-lg-7 col-md-6">
-          <div class="row g-3">
-            <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
-              <a class="position-relative d-block overflow-hidden" href="">
-                <img
-                  class="img-fluid"
-                  src="https://m.economictimes.com/thumb/msid-99108606,width-640,height-480,resizemode-4,imgsize-30790/best-indian-history-book.jpg"
-                  alt=""
-                />
-                <div
-                  class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
-                  style="margin: 1px"
-                >
-                  <h5 class="m-0">History</h5>
-                  <small class="text-primary">Courses</small>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-              <a class="position-relative d-block overflow-hidden" href="">
-                <img
-                  class="img-fluid"
-                  src="https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1356&h=668&fit=crop"
-                  alt=""
-                />
-                <div
-                  class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
-                  style="margin: 1px"
-                >
-                  <h5 class="m-0">English & General Studies</h5>
-                  <small class="text-primary">Courses</small>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-              <a class="position-relative d-block overflow-hidden" href="">
-                <img
-                  class="img-fluid"
-                  src="https://hospitalityinsights.ehl.edu/hubfs/Entrepreunership%20vs.%20Employment.jpeg"
-                  alt=""
-                />
-                <div
-                  class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
-                  style="margin: 1px"
-                >
-                  <h5 class="m-0">Entrepreneurship</h5>
-                  <small class="text-primary">Courses</small>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-lg-5 col-md-6 wow zoomIn"
-          data-wow-delay="0.7s"
-          style="min-height: 350px"
-        >
-          <a class="position-relative d-block h-100 overflow-hidden" href="">
-            <img
-              class="img-fluid position-absolute w-100 h-100"
-              src="https://igihe.com/IMG/logo/35-118-2f76c_1_.webp?1672917413"
-              alt=""
-              style="object-fit: cover"
-            />
-            <div
-              class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
-              style="margin: 1px"
-            >
-              <h5 class="m-0">Kinyarwanda</h5>
-              <small class="text-primary">Courses</small>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Courses End -->
-
   <!-- Team Start -->
   <div class="container-xxl py-5">
     <div class="container">
@@ -426,7 +315,7 @@
         </h6>
         <h1 class="mb-5">Expert Instructors</h1>
       </div>
-      <div class="row g-4">
+      <!-- <div class="row g-4">
         <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
           <div class="team-item bg-light">
             <div class="overflow-hidden">
@@ -535,7 +424,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- Team End -->
@@ -549,7 +438,7 @@
         </h6>
         <h1 class="mb-5">Our Students Say!</h1>
       </div>
-      <div class="owl-carousel testimonial-carousel position-relative">
+      <!-- <div class="owl-carousel testimonial-carousel position-relative">
         <div class="testimonial-item text-center">
           <img
             class="border rounded-circle p-2 mx-auto mb-3"
@@ -610,14 +499,14 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- Testimonial End -->
 
   <!-- Footer Start -->
   <div
-    class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn"
+    class="container-fluid bg-dark text-light footer pt-3 mt-3 wow fadeIn"
     data-wow-delay="0.1s"
   >
     <div class="container py-5">

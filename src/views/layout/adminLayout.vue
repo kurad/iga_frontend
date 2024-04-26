@@ -19,7 +19,7 @@
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><button @click.prevent="logout()" class="dropdown-item" >Logout</button></li>
                 </ul>
             </li>
         </ul>
@@ -59,6 +59,12 @@ export default {
                 }
                 console.error(error);
             })
+    },
+    methods:{
+        logout(){
+            localStorage.removeItem('token');
+            this.$router.push('/login');
+        },
     }
 
 

@@ -1,10 +1,7 @@
 <template>
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Dashboard</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
+            <h1 class="mb-4">Schools</h1>
 
             <a href="#" class="btn btn-primary btn-sm mb-3" @click.prevent="newSchool"><i class="fa fa-plus"></i> New
                 School</a>

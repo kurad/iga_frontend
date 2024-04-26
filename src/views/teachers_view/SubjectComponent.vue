@@ -1,17 +1,17 @@
 <template>
   <main>
     <div class="container-fluid px-4">
-      <h1 class="mt-4 mb-4">Subjects</h1>
-      <a
-        href="#"
-        class="btn btn-primary btn-sm mb-3"
-        @click.prevent="newSubject"
-        ><i class="fa fa-plus"></i> New Subject</a
-      >
+
       <div class="card mb-4">
         <div class="card-header">
           <i class="fas fa-table me-1"></i>
           List of Subjects
+          <a
+        href="#"
+        class="btn btn-primary btn-sm mb-3 float-right"
+        @click.prevent="newSubject"
+        ><i class="fa fa-plus"></i> New Subject</a
+      >
         </div>
         <div class="card-body">
           <table class="table">
