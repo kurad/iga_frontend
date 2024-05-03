@@ -224,7 +224,6 @@ export default {
         },
 
         async updateQuestion() {
-
             await axios.put('/topic/question/' + this.questions.id, this.questions)
                 .then((response) => {
                     this.question.unshift(response.data);

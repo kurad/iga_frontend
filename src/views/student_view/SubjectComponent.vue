@@ -119,7 +119,6 @@ export default {
         async getSubjects() {
             let response = await axios.get('/subjects');
             this.subjects = response.data;
-            console.log(this.subjects);
         },
 
         newSubject() {

@@ -56,7 +56,6 @@ export default {
   name: "Dashboard Admin",
   data() {
     return {
-     
       totalTopic: [],
       loading: false,
 

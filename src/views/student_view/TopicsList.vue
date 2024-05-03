@@ -1,7 +1,6 @@
 <template>
   <main>
     <div class="container-fluid px-4">
-      <h1 class="mt-4">Lessons</h1>
       <section class="content">
         <div class="container-fluid">
           <div class="row">

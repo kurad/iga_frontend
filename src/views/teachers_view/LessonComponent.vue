@@ -1,10 +1,7 @@
 <template>
   <main>
     <div class="container-fluid px-4">
-      <h1 class="mt-4">Lessons</h1>
-      <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Lessons</li>
-      </ol>
+      <h1 class="mt-2 mb-3">Lessons</h1>
     </div>
 
     <div class="container-fluid px-4" id="list_of_topics">

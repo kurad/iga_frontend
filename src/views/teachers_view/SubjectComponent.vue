@@ -14,7 +14,7 @@
       >
         </div>
         <div class="card-body">
-          <table class="table">
+          <table  class="table">
             <thead>
               <tr>
                 <th>#</th>
@@ -37,7 +37,7 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table >
         </div>
       </div>
       <!-- ============================================================================== -->
@@ -147,9 +147,13 @@
   </main>
 </template>
 <script>
+import DataTable from 'datatables.net-vue3';
+import  DataTablesLib  from 'datatables.net';
+DataTable.use(DataTablesLib);
 import axios from "axios";
 import $ from "jquery";
 export default {
+  components:{ DataTable},
   data() {
     return {
       subjects: [],
@@ -171,6 +175,7 @@ export default {
       let response = await axios.get("/teacher/subjects");
       this.subjects = response.data;
     },
+   
 
     newSubject() {
       $("#new_subject_modal").modal("show");
@@ -185,7 +190,6 @@ export default {
         .then((response) => {
           $("#new_subject_modal").modal("hide");
           this.subjects.unshift(response.data);
-          // this.isLoading(true)
           location.reload();
         })
         .catch((error) => {
@@ -197,7 +201,6 @@ export default {
         })
         .finally(() => {
           $("#new_subject_modal").modal("hide");
-          // this.errors = e.data.errors
         });
     },
 
@@ -209,7 +212,6 @@ export default {
     async userProfile() {
       await axios.get("/user").then((response) => {
         this.user = response.data;
-        // console.log(this.user)
       });
     },
   },
@@ -221,3 +223,6 @@ export default {
   },
 };
 </script>
+<style>
+@import 'datatables.net-dt';
+</style>

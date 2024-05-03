@@ -7,40 +7,60 @@
         <div class="col-xl-3 col-md-6">
           <div class="card bg-primary text-white mb-4">
             <div class="card-body">Schools</div>
-            <div
+            <div v-if="loading"
               class="card-footer d-flex align-items-center justify-content-between"
             >
-              {{ schools }}
+              Loading ...
+            </div>
+            <div v-else
+              class="card-footer d-flex align-items-center justify-content-between"
+            >
+              {{ this.statistics.schools }}
             </div>
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card bg-warning text-white mb-4">
             <div class="card-body">Subjects</div>
-            <div
+            <div v-if="loading"
               class="card-footer d-flex align-items-center justify-content-between"
             >
-              {{ subjects }}
+            Loading ...
+            </div>
+            <div v-else
+              class="card-footer d-flex align-items-center justify-content-between"
+            >
+            {{ this.statistics.subjects }}
             </div>
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card bg-success text-white mb-4">
             <div class="card-body">Lessons</div>
-            <div
+            <div v-if="loading"
               class="card-footer d-flex align-items-center justify-content-between"
             >
-              {{ lessons }}
+            Loading ...
+            </div>
+            <div v-else
+              class="card-footer d-flex align-items-center justify-content-between"
+            >
+            {{ this.statistics.lessons }}
             </div>
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card bg-danger text-white mb-4">
             <div class="card-body">Students</div>
-            <div
+            <div v-if="loading"
               class="card-footer d-flex align-items-center justify-content-between"
             >
-              {{ students }}
+            Loading ...
+            </div>
+            <div v-else
+              class="card-footer d-flex align-items-center justify-content-between"
+            >
+            {{ this.statistics.students }}
             </div>
           </div>
         </div>
@@ -70,7 +90,7 @@
                      <TeacherSubject />
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                     Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                     <TeacherUnits />
                   </div>
                   <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
                      Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
@@ -91,55 +111,38 @@
 <script>
 import axios from "axios";
 import TeacherSubject from '../views/teachers_view/SubjectComponent.vue'
+import TeacherUnits from '../views/teachers_view/ListUnitComponent.vue'
 
 export default {
   name: "Dashboard Admin",
   components:{
-    TeacherSubject
+    TeacherSubject,
+    TeacherUnits,
   },
   data() {
     return {
-      schools: [],
-      subjects: [],
-      lessons: [],
-      students: [],
+      loading: false,
+      statistics: [],
     };
   },
   created() {
-    this.countSchools();
-    this.countSubjects();
-    this.countLessons();
-    this.countStudents();
+    this.getStats();
   },
   methods: {
-    async countSchools() {
-      await axios.get("/v1/count/school").then(
+    async getStats() {
+      this.loading = true;
+      await axios.get("/v1/count/data").then(
         function (response) {
-          this.schools = response.data;
-          console.log(this.schools);
+          this.statistics = response.data;
+          console.log(this.statistics)
         }.bind(this)
-      );
-    },
-    async countSubjects() {
-      await axios.get("/v1/count/subject").then(
-        function (response) {
-          this.subjects = response.data;
-        }.bind(this)
-      );
-    },
-    async countLessons() {
-      await axios.get("/v1/count/lessons").then(
-        function (response) {
-          this.lessons = response.data;
-        }.bind(this)
-      );
-    },
-    async countStudents() {
-      await axios.get("/v1/count/student").then(
-        function (response) {
-          this.students = response.data;
-        }.bind(this)
-      );
+      )
+      .catch((error) =>{
+        console.log(error)
+      })
+      .finally(() =>{
+        this.loading = false
+      })
     },
   },
 };
